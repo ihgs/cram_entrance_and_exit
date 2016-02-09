@@ -1,0 +1,10 @@
+[Unit]
+Description = Cram Entrance And Exit Management
+Documentation = https://github.com/ihgs/cram_entrance_and_exit
+
+[Service]
+ExecStart = /usr/bin/python /opt/eaecm/__init__.py
+Type = simple
+
+[Install]
+WantedBy = multi-user.target
