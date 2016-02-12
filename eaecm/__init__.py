@@ -17,9 +17,9 @@ class MyCardReader(object):
         self.idm = binascii.hexlify(tag.idm)
         try:
             print self.send_id(self.idm)
-        except ConnectionError as e:
-            print e.msg
-        
+        except requests.exceptions.RequestException as e:
+            print e
+
         return True
 
     def waiting_read_id(self):
