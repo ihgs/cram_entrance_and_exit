@@ -15,7 +15,7 @@ class MyCardReader(object):
     def on_connect(self, tag):
         print "touched"
         self.idm = binascii.hexlify(tag.idm)
-        print send_id(self.idm)
+        print self.send_id(self.idm)
         return True
 
     def waiting_read_id(self):
