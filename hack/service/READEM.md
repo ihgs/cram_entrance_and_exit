@@ -2,8 +2,7 @@
 ## prepare
 
 ```
-$ cd /opt
-$ sudo ln -s (eaecm directory)
+$ sudo ln -s (this repository top) /opt/eaecm
 $ vi /etc/eaecm.conf
 ```
 

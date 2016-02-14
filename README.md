@@ -12,5 +12,5 @@ pip install -r requirements.txt
 ## 実行
 
 ```
-python eaecm/__init__.py
+./bin/eaecm --host xx --port yy --token zz
 ```

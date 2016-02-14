@@ -4,7 +4,7 @@ Documentation = https://github.com/ihgs/cram_entrance_and_exit
 
 [Service]
 EnvironmentFile =/etc/eaecm.conf
-ExecStart = /usr/bin/python /opt/eaecm/__init__.py --host $CRAM_HOST --port $CRAM_PORT --token $CRAM_TOKEN
+ExecStart = /opt/eaecm/bin/eaecm --host $CRAM_HOST --port $CRAM_PORT --token $CRAM_TOKEN
 Type = simple
 
 [Install]
