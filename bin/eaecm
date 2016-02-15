@@ -18,11 +18,7 @@ def main():
     cr = MyCardReader(args.hostname, args.port, args.token)
 
     while True:
-        print "touch card:"
         cr.waiting_read_id()
-        print "released"
-        print cr.idm
-
 
 if __name__ == '__main__':
     main()

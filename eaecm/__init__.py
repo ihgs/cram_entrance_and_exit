@@ -3,6 +3,9 @@ import nfc
 import requests
 import time
 import datetime
+import traceback
+from logging import getLogger
+logger = getLogger("eaecm")
 
 class MyCardReader(object):
 
@@ -12,12 +15,14 @@ class MyCardReader(object):
         self.token = token
 
     def on_connect(self, tag):
-        print "touched"
+        logger.info("touched")
         self.idm = binascii.hexlify(tag.idm)
+        logger.info("id:%s" % self.idm)
         try:
-            print self.send_id(self.idm)
-        except requests.exceptions.RequestException as e:
-            print e
+            name = self.send_id(self.idm)
+            logger.info("name:%s" % name)
+        except:
+            logger.error(traceback.format_exc())
 
         return True
 
@@ -25,6 +30,8 @@ class MyCardReader(object):
         clf = nfc.ContactlessFrontend('usb')
         try:
             clf.connect(rdwr={'on-connect': self.on_connect})
+        except:
+            logger.error(traceback.format_exc())
         finally:
             clf.close()
 
@@ -48,5 +55,5 @@ class MyCardReader(object):
                 name = body["name"]
                 return name
             else:
-                pass #TODO error
+                logger.error(body["message"])
         return None
