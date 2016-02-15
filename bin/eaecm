@@ -2,6 +2,8 @@
 import sys
 import os
 import argparse
+from logging import getLogger, StreamHandler, INFO
+logger = getLogger("eaecm")
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)) ,'../'))
 from eaecm import MyCardReader
@@ -21,4 +23,8 @@ def main():
         cr.waiting_read_id()
 
 if __name__ == '__main__':
+    ch = StreamHandler()
+    ch.setLevel(INFO)
+    logger.setLevel(INFO)
+    logger.addHandler(ch)
     main()
