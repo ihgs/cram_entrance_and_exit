@@ -53,7 +53,7 @@ class Display(QtGui.QMainWindow):
         window = QtGui.QWidget()
         window.setLayout(grid)
         self.setCentralWidget(window)
-        self.setGeometry(0,0, 480, 300)
+        self.setGeometry(0,0, 480, 320)
         self.setWindowTitle(TITLE)
         self.show()
 

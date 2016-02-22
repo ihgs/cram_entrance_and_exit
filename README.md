@@ -32,7 +32,7 @@ CRAM_TOKEN=XXXX
 ここで指定するTOKENを、cram側に登録してください。
 
 ```
-$ sudo cp eaecm.service /etc/systemd/system
+$ sudo cp hack/service/eaecm.service /etc/systemd/system
 ```
 
 ## サービス起動
