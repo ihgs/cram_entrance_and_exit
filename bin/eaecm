@@ -2,11 +2,14 @@
 import sys
 import os
 import argparse
+from PyQt4.QtGui import QApplication
 from logging import getLogger, StreamHandler, INFO
 logger = getLogger("eaecm")
 
 sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)) ,'../'))
 from eaecm import MyCardReader
+from eaecm.gui import Display
+
 
 def main():
     parser = argparse.ArgumentParser(description='Send Timestamp')
@@ -17,14 +20,19 @@ def main():
     parser.add_argument('--token','-t', dest='token', required=True)
     args = parser.parse_args()
 
-    cr = MyCardReader(args.hostname, args.port, args.token)
+    app = QApplication(sys.argv)
+    display = Display()
 
+    cr = MyCardReader(args.hostname, args.port, args.token)
+    cr.setCallback(display.callback)
     while True:
         cr.waiting_read_id()
 
+    sys.exit(app.exec_())
+
 if __name__ == '__main__':
     ch = StreamHandler()
-    ch.setLevel(INFO)
-    logger.setLevel(INFO)
+    # ch.setLevel(INFO)
+    # logger.setLevel(INFO)
     logger.addHandler(ch)
     main()

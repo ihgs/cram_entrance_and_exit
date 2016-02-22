@@ -14,14 +14,20 @@ class MyCardReader(object):
         self.url = "http://%s:%s/api/stamp" % (hostname, port)
         self.token = token
 
+    def setCallback(self, callback):
+        self.callback = callback
+
     def on_connect(self, tag):
         logger.info("touched")
         self.idm = binascii.hexlify(tag.idm)
         logger.info("id:%s" % self.idm)
         try:
             name = self.send_id(self.idm)
+            self.callback({"name": name})
             logger.info("name:%s" % name)
         except:
+            self.callback({"error": True, "idm": self.idm })
+            logger.error("error:%s" % self.idm)
             logger.error(traceback.format_exc())
 
         return True
