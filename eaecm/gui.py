@@ -71,9 +71,9 @@ class Display(QtGui.QMainWindow):
 
     def callback(self, opt):
         if opt.has_key("name"):
-            show_name(opt["name"])
+            self.show_name(opt["name"])
         elif opt.has_key("error"):
-            show_error("check log by 'journalctl -u eaecm'")
+            self.show_error("check log by 'journalctl -u eaecm'")
 
 
     def time_draw(self):

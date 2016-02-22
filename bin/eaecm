@@ -2,6 +2,7 @@
 import sys
 import os
 import argparse
+import threading
 from PyQt4.QtGui import QApplication
 from logging import getLogger, StreamHandler, INFO
 logger = getLogger("eaecm")
@@ -10,6 +11,10 @@ sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)) ,'../'))
 from eaecm import MyCardReader
 from eaecm.gui import Display
 
+
+def reader():
+    while True:
+        cr.waiting_read_id()
 
 def main():
     parser = argparse.ArgumentParser(description='Send Timestamp')
@@ -25,8 +30,9 @@ def main():
 
     cr = MyCardReader(args.hostname, args.port, args.token)
     cr.setCallback(display.callback)
-    while True:
-        cr.waiting_read_id()
+
+    t = threading.Thread(target=reader)
+    t.start()
 
     sys.exit(app.exec_())
 
