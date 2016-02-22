@@ -34,7 +34,7 @@ def main():
     cr = MyCardReader(args.hostname, args.port, args.token)
     cr.setCallback(display.callback)
 
-    t = threading.Thread(target=reader, args=(cr))
+    t = threading.Thread(target=reader, args=(cr,))
     t.start()
 
     sys.exit(app.exec_())
