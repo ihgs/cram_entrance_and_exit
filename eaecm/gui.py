@@ -61,7 +61,7 @@ class Display(QtGui.QMainWindow):
         self.messageLabel.setText(MESSAGE_GREET)
         self.nameLabel.setText(name)
         time.sleep(3)
-        self.messageLabel.setText(MESSAGE_GREET)
+        self.messageLabel.setText(MESSAGE_INIT)
         self.nameLabel.setText("")
 
     def show_error(self, error):
