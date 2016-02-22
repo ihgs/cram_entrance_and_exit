@@ -14,8 +14,8 @@ def now():
     d = datetime.datetime.today()
     return d.strftime("%Y-%m-%d %H:%M")
 
-def font():
-    return QtGui.QFont("Times", 30)
+def font(size=25):
+    return QtGui.QFont("Times", size)
 
 
 class Display(QtGui.QMainWindow):
@@ -25,7 +25,7 @@ class Display(QtGui.QMainWindow):
 
     def initUI(self):
         self.timeLabel = QtGui.QLabel(now())
-        self.timeLabel.setFont(font())
+        self.timeLabel.setFont(font(30))
         self.timeLabel.setAlignment(Qt.AlignCenter)
 
         self.messageLabel = QtGui.QLabel(MESSAGE_INIT)
@@ -53,7 +53,7 @@ class Display(QtGui.QMainWindow):
         window = QtGui.QWidget()
         window.setLayout(grid)
         self.setCentralWidget(window)
-        self.setGeometry(0,0, 480, 320)
+        self.setGeometry(0,0, 480, 300)
         self.setWindowTitle(TITLE)
         self.show()
 

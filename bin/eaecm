@@ -12,9 +12,12 @@ from eaecm import MyCardReader
 from eaecm.gui import Display
 
 
-def reader():
-    while True:
-        cr.waiting_read_id()
+def reader(cr):
+    try:
+        while True:
+            cr.waiting_read_id()
+    except:
+        sys.exit(1)
 
 def main():
     parser = argparse.ArgumentParser(description='Send Timestamp')
@@ -31,7 +34,7 @@ def main():
     cr = MyCardReader(args.hostname, args.port, args.token)
     cr.setCallback(display.callback)
 
-    t = threading.Thread(target=reader)
+    t = threading.Thread(target=reader, args=(cr))
     t.start()
 
     sys.exit(app.exec_())
