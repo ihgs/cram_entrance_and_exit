@@ -1,0 +1,13 @@
+[Unit]
+Description = Cram Entrance And Exit Management
+Documentation = https://github.com/ihgs/cram_entrance_and_exit
+
+[Service]
+EnvironmentFile =/etc/eaecm.conf
+Environment =DISPLAY=:0.0
+ExecStart = /opt/eaecm/bin/eaecm --host $CRAM_HOST --port $CRAM_PORT --token $CRAM_TOKEN
+Type = simple
+User = pi
+
+[Install]
+WantedBy = graphical.target

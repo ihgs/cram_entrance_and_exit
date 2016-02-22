@@ -1,0 +1,47 @@
+#!/usr/bin/python
+import sys
+import os
+import argparse
+import threading
+from PyQt4.QtGui import QApplication
+from logging import getLogger, StreamHandler, INFO
+logger = getLogger("eaecm")
+
+sys.path.append(os.path.join(os.path.dirname(os.path.abspath(__file__)) ,'../'))
+from eaecm import MyCardReader
+from eaecm.gui import Display
+
+
+def reader(cr):
+    try:
+        while True:
+            cr.waiting_read_id()
+    except:
+        sys.exit(1)
+
+def main():
+    parser = argparse.ArgumentParser(description='Send Timestamp')
+    parser.add_argument('--host', dest='hostname', default="localhost",
+                   help='hostname/ip')
+    parser.add_argument('--port', dest='port',default="3000",
+                   help='port')
+    parser.add_argument('--token','-t', dest='token', required=True)
+    args = parser.parse_args()
+
+    app = QApplication(sys.argv)
+    display = Display()
+
+    cr = MyCardReader(args.hostname, args.port, args.token)
+    cr.setCallback(display.callback)
+
+    t = threading.Thread(target=reader, args=(cr,))
+    t.start()
+
+    sys.exit(app.exec_())
+
+if __name__ == '__main__':
+    ch = StreamHandler()
+    # ch.setLevel(INFO)
+    # logger.setLevel(INFO)
+    logger.addHandler(ch)
+    main()
