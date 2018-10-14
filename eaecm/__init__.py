@@ -11,7 +11,7 @@ class MyCardReader(object):
 
 
     def __init__(self, hostname, port, token):
-        self.url = "http://%s:%s/api/stamp" % (hostname, port)
+        self.url = "https://%s:%s/api/stamp" % (hostname, port)
         self.token = token
 
     def setCallback(self, callback):
@@ -55,7 +55,7 @@ class MyCardReader(object):
         response = requests.post(
             self.url, data=params, headers=headers
         )
-        if response.status_code == 200:
+        if response.status_code < 300:
             body = response.json()
             if body["status"] == "success":
                 name = body["name"]
